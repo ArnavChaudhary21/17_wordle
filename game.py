@@ -11,13 +11,15 @@ class WordleGame:
 
     def run(self):
         print(f"Wordle — {self.length} letters, 6 guesses.")
-        for _ in range(6):
+        guesses_used = 0
+        while guesses_used < 6:
             guess = input("> ").strip().lower()
             if guess == "q":
                 return
             if len(guess) != self.length or not guess.isalpha():
                 print("Enter a valid word of the required length.")
                 continue
+            guesses_used += 1
             feedback = evaluate(self.target, guess)
             self.history.append((guess, feedback))
             print(" ".join(feedback))
